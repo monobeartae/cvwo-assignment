@@ -28,10 +28,23 @@
   color: #61dafb;
 }
 
+.blue {
+  color: blue;
+  border: none;
+  background-color: lavender;
+}
+
+.lol {
+  color: #a5ef0e;
+  border: none;
+  background-color: blanchedalmond;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

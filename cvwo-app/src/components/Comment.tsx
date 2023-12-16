@@ -4,7 +4,7 @@ type CommentProps = {
     children: ReactNode
 }
 
-const Comment = ({ title = "taisei tiddies", children }: CommentProps) => {
+const Comment = ({ title = "aaaa", children }: CommentProps) => {
     return (
         <section>
             <h2>{title}</h2>

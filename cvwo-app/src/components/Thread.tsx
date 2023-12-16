@@ -3,7 +3,7 @@ type ThreadProps = { title: string }
 
 const Thread = ({ title }: ThreadProps) => {
     return (
-        <div>Thread {title}</div>
+        <div> {title}</div>
     )
 }
 

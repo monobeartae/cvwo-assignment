@@ -8,8 +8,8 @@ const ExampleCounter = ({ setCount, children }: CounterProps) => {
 
     return (
         <>
-            <h1>{children}</h1>
-            <button onClick={() => setCount(prev => prev + 1)}>add</button>
+            <h1 className='blue'>{children}</h1>
+            <button className="lol" onClick={() => setCount(prev => prev + 1)}>add</button>
         </>
     )
 }
