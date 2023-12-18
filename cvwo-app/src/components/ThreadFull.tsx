@@ -1,15 +1,10 @@
 import React from 'react'
 import ThreadPreview from './ThreadPreview'
+import { Thread } from '../data/Thread'
 
-type ThreadProps = {
-    id: number,
-    title: string,
-    children: string
-}
-
-const ThreadFull = ({ id, title, children }: ThreadProps) => {
+const ThreadFull = ({ id, title, children, author }: Thread) => {
     return (
-        <ThreadPreview id={id} title={title}>
+        <ThreadPreview id={id} title={title} author={author}>
             {children}
         </ThreadPreview>
     )
