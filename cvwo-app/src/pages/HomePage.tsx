@@ -1,12 +1,22 @@
-import React from 'react'
-import ThreadPreview from '../components/ThreadPreview'
+import React, { useState } from 'react'
+import { Route, Routes } from 'react-router-dom'
+import Header from '../Header'
+import { Thread } from '../data/Thread'
+import ThreadPreview from '../components/ThreadItem'
 
 const HomePage = () => {
+    const [threads, setThreads] = useState<Thread[]>([
+        { id: 0, title: 'Thread1', children: 'aaa', author: 'mono.' }
+    ]);
+
     return (
         <>
-            <ThreadPreview id={0} title='My Thread' author='mono.'>aaaaaaaaaa</ThreadPreview>
-            <ThreadPreview id={0} title='My Thread' author='mono.'>aaaaaaaaaa</ThreadPreview>
-            <ThreadPreview id={0} title='My Thread' author='mono.'>aaaaaaaaaa</ThreadPreview>
+            <Header />
+            <Routes>
+                <Route>
+
+                </Route>
+            </Routes>
         </>
 
     )

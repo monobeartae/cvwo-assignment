@@ -9,14 +9,8 @@ import HomePage from './pages/HomePage';
 import { Thread } from './data/Thread';
 import { User } from './data/User';
 
-import ThreadPreview from './components/ThreadPreview';
-import ThreadFull from './components/ThreadFull';
-
 
 function App() {
-  const [threads, setThreads] = useState<Thread[]>([
-    { id: 0, title: 'Thread1', children: 'aaa', author: 'mono.' }
-  ]);
   const [user, setUser] = useState<User | null>(null);
 
   return (

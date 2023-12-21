@@ -2,9 +2,9 @@ import React, { useEffect } from 'react'
 import Card from '@mui/material/Card';
 import { useNavigate } from 'react-router-dom'
 import { Box, CardActionArea, CardContent } from '@mui/material';
-import { Thread } from '../data/Thread';
+import { ThreadProps } from '../data/Thread';
 
-const ThreadPreview = ({ id, title, children, author }: Thread) => {
+const ThreadItem = ({ id, title, children, author }: ThreadProps) => {
     const navigate = useNavigate();
     const toThread = () => {
         navigate('/home/thread');
@@ -22,4 +22,4 @@ const ThreadPreview = ({ id, title, children, author }: Thread) => {
     )
 }
 
-export default ThreadPreview
+export default ThreadItem
