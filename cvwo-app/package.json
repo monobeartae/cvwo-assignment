@@ -17,6 +17,7 @@
     "react": "^18.3.0-canary-3e00e58a6-20231217",
     "react-dom": "^18.2.0",
     "react-native": "^0.73.1",
+    "react-native-web": "^0.19.9",
     "react-router-dom": "^6.21.0",
     "react-scripts": "^5.0.1",
     "styled-components": "^6.1.1",
