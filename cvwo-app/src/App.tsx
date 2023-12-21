@@ -11,15 +11,15 @@ import { User } from './data/User';
 
 
 function App() {
-  const [user, setUser] = useState<User | null>(null);
+  const invalidUser = { id: -1, name: 'null' }
+  const [user, setUser] = useState<User>(invalidUser);
 
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/home" element={<HomePage />} />
-          {/* <Route path="/home/thread" element={<ThreadFull />} /> */}
+          <Route path="/" element={<LoginPage setUser={setUser} />} />
+          <Route path="/home/*" element={<HomePage user={user} />} />
         </Routes>
       </BrowserRouter>
     </>

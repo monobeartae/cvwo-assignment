@@ -7,10 +7,12 @@ type ThreadsViewProps = {
 const ThreadsView = ({ threads }: ThreadsViewProps) => {
     return (
         <>
-            {/* threads.map((thread) => {
-
-            }) */}
-            <ThreadItem id={0} title='My Thread' author='mono.'>aaaaaaaaaa</ThreadItem>
+            <h2>Threads</h2>
+            {threads.map(thread => (
+                <ThreadItem key={thread.id} id={thread.id} title={thread.title} author={thread.author}>
+                    {thread.children}
+                </ThreadItem>
+            ))}
         </>
     )
 

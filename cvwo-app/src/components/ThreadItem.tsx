@@ -7,13 +7,14 @@ import { Thread } from '../data/Thread';
 const ThreadItem = ({ id, title, children, author }: Thread) => {
     const navigate = useNavigate();
     const toThread = () => {
-        navigate('/home/thread');
+        navigate(`/home/thread/${id}`);
     }
     return (
         <Card variant='outlined'>
             <CardActionArea onClick={toThread}>
                 <CardContent>
                     <h3>{title}</h3>
+                    <p>{author}</p>
                     <p>{children}</p>
                 </CardContent>
             </CardActionArea>

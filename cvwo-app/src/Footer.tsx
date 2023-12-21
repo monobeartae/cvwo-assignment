@@ -10,17 +10,17 @@ const theme = createTheme({
     },
 })
 
-const Header = () => {
+type FooterProps = {
+    username: string
+}
+const Footer = ({ username }: FooterProps) => {
     return (
         <ThemeProvider theme={theme}>
-            <h1 style={{ color: 'gray', padding: 10, margin: 0, backgroundColor: 'lightgray' }}>mono.'s forum</h1>
-            <Link to='/'>
-                <Button variant='outlined' color='primary'>Log Out</Button>
-            </Link>
-
+            <p>footer</p>
+            <p style={{ color: 'gray', padding: 10, margin: 0, textAlign: 'right' }}>{username}</p>
         </ThemeProvider>
 
     )
 }
 
-export default Header
+export default Footer
