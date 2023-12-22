@@ -7,34 +7,16 @@ type ThreadsViewProps = {
 }
 const ThreadsView = ({ threads }: ThreadsViewProps) => {
     return (
-        <div style={{
-            overflowX: "hidden"
-        }}>
+        <>
             <h2>Threads</h2>
-            {/* {threads &&
-                threads.map((thread) => (
-                    <ThreadItem key={thread.id} id={thread.id} title={thread.title} author={thread.author}>
-                        {thread.children}
-                    </ThreadItem>
-                ))} */}
-            <FlatList data={threads} renderItem={
-                ({ item }) => <ThreadItem key={item.id} id={item.id} title={item.title} author={item.author}>
-                    {item.children}
-                </ThreadItem>} keyExtractor={(item) => item.id.toString()} />
-            {/* <ThreadItem id={0} title={"aaa"} author={'esfr'}>
-                adafaf
-            </ThreadItem>
-            <ThreadItem id={0} title={"aaa"} author={'esfr'}>
-                adafaf
-            </ThreadItem>
-            <ThreadItem id={0} title={"aaa"} author={'esfr'}>
-                adafaf
-            </ThreadItem>
-            <ThreadItem id={0} title={"aaa"} author={'esfr'}>
-                adafaf
-            </ThreadItem> */}
-
-        </div>
+            <FlatList data={threads}
+                renderItem={
+                    ({ item }) =>
+                        <ThreadItem key={item.id} id={item.id} title={item.title} author={item.author} replies={item.replies}>
+                            {item.children}
+                        </ThreadItem>}
+                keyExtractor={(item) => item.id.toString()} ItemSeparatorComponent={() => <View style={{ height: 4 }} />} />
+        </>
     )
 
 }

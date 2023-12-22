@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { Box, CardActionArea, CardContent } from '@mui/material';
 import { Thread } from '../data/Thread';
 
-const ThreadItem = ({ id, title, children, author }: Thread) => {
+const ThreadItem = ({ id, title, children, author, replies }: Thread) => {
     const navigate = useNavigate();
     const toThread = () => {
         navigate(`/home/thread/${id}`);

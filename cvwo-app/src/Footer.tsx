@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import './App.css'
+import './pages/HomePage.css'
 import { Button, createTheme, ThemeProvider } from '@mui/material'
 import { blueGrey, grey } from '@mui/material/colors';
 
