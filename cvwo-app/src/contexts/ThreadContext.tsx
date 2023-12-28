@@ -123,9 +123,13 @@ const initThreadContextState: UseThreadContextType = {
 
 export const ThreadContext = createContext<UseThreadContextType>(initThreadContextState)
 
-export const ThreadProvider = (initThreadsState: ThreadsState): ReactElement => {
+type ChildrenProps = {
+    children?: ReactElement
+}
+export const ThreadProvider = ({ children, ...initThreadsState }: ChildrenProps & ThreadsState): ReactElement => {
     return (
         <ThreadContext.Provider value={useThreadContext(initThreadsState)}>
+            {children}
         </ThreadContext.Provider>
     )
 }

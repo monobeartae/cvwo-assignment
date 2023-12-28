@@ -10,6 +10,7 @@ import { useThreads } from '../hooks/ThreadHooks'
 import { User } from '../contexts/UserContext'
 import ThreadsView from '../components/ThreadsView'
 import ThreadFullView from '../components/ThreadFullView'
+import { Thread, ThreadProvider } from '../contexts/ThreadContext'
 
 type HomeProps = {
     user: User
@@ -17,27 +18,36 @@ type HomeProps = {
 
 const HomePage = ({ user }: HomeProps) => {
 
-    const { threads } = useThreads();
+    // pretend this is from database
+    const threads: Thread[] = [
+        { id: 0, title: 'Thread1', children: 'aaa', author: 'taisei_tiddies', replies: null },
+        { id: 1, title: 'Thread2', children: 'bruhurbruhefsiu', author: 'mono.', replies: null },
+        { id: 2, title: 'Thread3', children: 'meow meow meow meow meow meow meow', author: 'manchi', replies: null },
+        { id: 3, title: 'screwed my cs2030s finals and feeling like shit', children: 'anyone else\?', author: 'mono.', replies: null },
+        { id: 4, title: 'Thread4', children: 'meow meow meow meow meow meow meow', author: 'manchi', replies: null },
+        { id: 5, title: 'running out of ideas', children: 'fml n pray', author: '>--|-o', replies: null }
+    ];
 
     return (
-        <>
-            <Header />
-            <div className='threads'>
-                <Routes>
-                    <Route path={"/thread/:id"} element={
-                        <ThreadFullView />
-                    } />
-                    <Route path="/" element={
-                        <ThreadsView threads={threads} />
-                    } />
-                    <Route path="*" element={
-                        <p>page not found</p>
-                    } />
-                </Routes>
-            </div>
-
-            <Footer username={user.name} />
-        </>
+        <ThreadProvider threads={threads}>
+            <>
+                <Header />
+                <div className='threads'>
+                    <Routes>
+                        <Route path={"/thread/:id"} element={
+                            <ThreadFullView />
+                        } />
+                        <Route path="/" element={
+                            <ThreadsView />
+                        } />
+                        <Route path="*" element={
+                            <p>page not found</p>
+                        } />
+                    </Routes>
+                </div>
+                <Footer username={user.name} />
+            </>
+        </ThreadProvider>
 
     )
 }

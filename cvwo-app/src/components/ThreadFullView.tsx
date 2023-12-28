@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import ThreadItem from './ThreadItem'
 import { Thread, CommentData, Comment } from '../contexts/ThreadContext'
@@ -20,7 +20,6 @@ type ThreadListProps = {
 }
 
 function setReplies(id: number, CommentData: CommentData[]): Comment[] | null {
-    console.log(`---setting replies for post id ${id}`);
     var temp: Comment[] = CommentData.filter(r => r.target_id === id)
         .map<Comment>(rd => {
             return { id: rd.id, author: rd.author, children: rd.children, replies: null };
@@ -47,15 +46,17 @@ const ThreadFullView = ({ }: ThreadListProps) => {
     const replies = all_replies.filter(r => r.root_id.toString() === id);
 
     var thread = threadData.threads.find(x => x.id.toString() === id);
-    if (!thread) {
-    } else if (thread.replies == null) {
-        threadData.fetchComments({ id: thread.id });
-        // MOVE TO THREADCONTEXT
-        var newThreads: Thread[] = [...threadData.threads];
-        newThreads.filter(thread => thread.id.toString() === id).forEach(x => x.replies = setReplies(Number(x.id), replies));
-        thread = newThreads.find((thread) =>
-            thread.id.toString() === id);
-    }
+
+    useEffect(() => {
+        thread && thread.replies == null && threadData.fetchComments({ id: thread.id })
+    }, []);
+
+    // MOVE TO THREADCONTEXT
+    var newThreads: Thread[] = [...threadData.threads];
+    newThreads.filter(thread => thread.id.toString() === id).forEach(x => x.replies = setReplies(Number(x.id), replies));
+    thread = newThreads.find((thread) =>
+        thread.id.toString() === id);
+
 
     return (
         <>

@@ -1,11 +1,13 @@
 import ThreadItem from "./ThreadItem";
 import { Thread } from "../contexts/ThreadContext";
 import { FlatList, View } from "react-native";
+import { useThreads } from "../hooks/ThreadHooks";
 
 type ThreadsViewProps = {
-    threads: Thread[]
+    //threads: Thread[]
 }
-const ThreadsView = ({ threads }: ThreadsViewProps) => {
+const ThreadsView = ({ }: ThreadsViewProps) => {
+    const { threads } = useThreads();
     return (
         <>
             <h2>Threads</h2>
