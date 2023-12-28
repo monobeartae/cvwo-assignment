@@ -3,7 +3,7 @@ import './LoginPage.css'
 import { Button, createTheme, TextField, ThemeProvider } from "@mui/material";
 import { Link } from 'react-router-dom'
 import { blueGrey, grey } from '@mui/material/colors';
-import { User } from '../data/User';
+import { User } from '../contexts/UserContext';
 
 
 const theme = createTheme({

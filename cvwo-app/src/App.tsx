@@ -6,8 +6,8 @@ import './App.css';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 
-import { Thread } from './data/Thread';
-import { User } from './data/User';
+import { Thread } from './contexts/ThreadContext';
+import { User } from './contexts/UserContext';
 
 
 function App() {

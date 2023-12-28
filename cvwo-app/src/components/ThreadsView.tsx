@@ -1,5 +1,5 @@
 import ThreadItem from "./ThreadItem";
-import { Thread } from "../data/Thread";
+import { Thread } from "../contexts/ThreadContext";
 import { FlatList, View } from "react-native";
 
 type ThreadsViewProps = {

@@ -6,10 +6,11 @@ import './HomePage.css'
 
 import Header from '../Header'
 import Footer from '../Footer'
-import { Thread } from '../data/Thread'
-import { User } from '../data/User'
+import { Thread } from '../contexts/ThreadContext'
+import { User } from '../contexts/UserContext'
 import ThreadsView from '../components/ThreadsView'
 import ThreadFullView from '../components/ThreadFullView'
+import { ThreadProvider } from '../contexts/ThreadContext'
 
 type HomeProps = {
     user: User
@@ -17,23 +18,24 @@ type HomeProps = {
 
 const HomePage = ({ user }: HomeProps) => {
     // pretend this is from database
-    const [threads, setThreads] = useState<Thread[]>([
+    const threads: Thread[] = [
         { id: 0, title: 'Thread1', children: 'aaa', author: 'taisei_tiddies', replies: null },
         { id: 1, title: 'Thread2', children: 'bruhurbruhefsiu', author: 'mono.', replies: null },
         { id: 2, title: 'Thread3', children: 'meow meow meow meow meow meow meow', author: 'manchi', replies: null },
         { id: 3, title: 'screwed my cs2030s finals and feeling like shit', children: 'anyone else\?', author: 'mono.', replies: null },
         { id: 4, title: 'Thread4', children: 'meow meow meow meow meow meow meow', author: 'manchi', replies: null },
         { id: 5, title: 'running out of ideas', children: 'fml n pray', author: '>--|-o', replies: null }
-    ]);
+    ];
 
 
     return (
         <>
+            <ThreadProvider threads={threads} />
             <Header />
             <div className='threads'>
                 <Routes>
                     <Route path={"/thread/:id"} element={
-                        <ThreadFullView threads={threads} setThreads={setThreads} />
+                        <ThreadFullView />
                     } />
                     <Route path="/" element={
                         <ThreadsView threads={threads} />

@@ -1,14 +1,14 @@
 import React from 'react'
-import { Reply } from '../data/Thread'
+import { Comment } from '../contexts/ThreadContext'
 import Card from '@mui/material/Card';
 import { useNavigate } from 'react-router-dom'
 import { Box, CardActionArea, CardContent } from '@mui/material';
 import { FlatList, View } from 'react-native'
 import '../pages/HomePage.css'
 
-const ReplyItem = ({ id, author, children, replies }: Reply) => {
+const CommentItem = ({ id, author, children, replies }: Comment) => {
     return (
-        <div className='reply'>
+        <div className='Comment'>
             <Card variant='outlined'>
                 <CardContent>
                     <p>{author}</p>
@@ -17,7 +17,7 @@ const ReplyItem = ({ id, author, children, replies }: Reply) => {
             </Card>
             <FlatList data={replies} renderItem={
                 ({ item }) =>
-                    <ReplyItem id={item.id} author={item.author} replies={item.replies}>{item.children}</ReplyItem>
+                    <CommentItem id={item.id} author={item.author} replies={item.replies}>{item.children}</CommentItem>
             }
                 keyExtractor={(item) => item.id.toString()} ItemSeparatorComponent={() => <View style={{ height: 2 }} />} />
         </div>
@@ -25,4 +25,4 @@ const ReplyItem = ({ id, author, children, replies }: Reply) => {
     )
 }
 
-export default ReplyItem
+export default CommentItem
