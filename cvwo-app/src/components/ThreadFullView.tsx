@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import ThreadItem from './ThreadItem'
 import { Thread, CommentData, Comment } from '../contexts/ThreadContext'
 import { useThreads } from '../hooks/ThreadHooks'
-import CommentItem from './CommentItem'
+import CommentItem from './ReplyItem'
 import { Button, createTheme, ThemeProvider } from '@mui/material'
 import { blueGrey, grey } from '@mui/material/colors';
 import { FlatList, View } from 'react-native'
@@ -35,7 +35,6 @@ const ThreadFullView = ({ }: ThreadListProps) => {
     const { id } = useParams();
     const threadData = useThreads();
 
-    console.log(`fetching thread info for ${id}`);
     // pretend this is from database
     const all_replies: CommentData[] = [
         { id: 100, root_id: 0, target_id: 0, author: 'donut', children: 'wow very cool' },
@@ -46,7 +45,6 @@ const ThreadFullView = ({ }: ThreadListProps) => {
     ];
     // fetch from db server
     const replies = all_replies.filter(r => r.root_id.toString() === id);
-    console.log(`filtered root ids`);
 
     var thread = threadData.threads.find(x => x.id.toString() === id);
     if (!thread) {
@@ -57,9 +55,8 @@ const ThreadFullView = ({ }: ThreadListProps) => {
         newThreads.filter(thread => thread.id.toString() === id).forEach(x => x.replies = setReplies(Number(x.id), replies));
         thread = newThreads.find((thread) =>
             thread.id.toString() === id);
-        console.log(`set replies`);
     }
-    console.log(`rendering`);
+
     return (
         <>
             <ThemeProvider theme={theme}>

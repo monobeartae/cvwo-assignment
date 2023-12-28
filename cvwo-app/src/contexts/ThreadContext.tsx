@@ -29,10 +29,6 @@ type CommentData = {
 
 export type { Thread, ThreadsState, Comment, CommentData }
 
-const initThreads: ThreadsState = {
-    threads: []
-}
-
 const enum THREAD_ACTIONS {
     ADD_THREAD,
     ADD_COMMENT,
@@ -64,7 +60,7 @@ const reducer = (state: ThreadsState, action: ReducerAction): ThreadsState => {
         case THREAD_ACTIONS.ADD_THREAD:
             return { ...state };
         case THREAD_ACTIONS.FETCH_COMMENTS:
-
+            console.log("fetching comments");
             return { ...state };
         case THREAD_ACTIONS.UPDATE_THREAD:
             return { ...state };
@@ -85,8 +81,12 @@ type UseThreadContextType = {
 
 }
 
+const initThreads: ThreadsState = {
+    threads: []
+}
+
 const useThreadContext = (initState: ThreadsState): UseThreadContextType => {
-    const [state, dispatch] = useReducer(reducer, initThreads)
+    const [state, dispatch] = useReducer(reducer, initState)
 
     const addThread = useCallback(() => {
         dispatch({ type: THREAD_ACTIONS.ADD_THREAD })
@@ -126,7 +126,6 @@ export const ThreadContext = createContext<UseThreadContextType>(initThreadConte
 export const ThreadProvider = (initThreadsState: ThreadsState): ReactElement => {
     return (
         <ThreadContext.Provider value={useThreadContext(initThreadsState)}>
-
         </ThreadContext.Provider>
     )
 }
