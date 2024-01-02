@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Thread, AddThreadProps, FetchCommentProps, UpdateThreadProps, ThreadContext } from "../contexts/ThreadContext";
+import { Thread, AddThreadProps, FetchCommentProps, UpdateThreadProps, ThreadContext, DeleteThreadProps } from "../contexts/ThreadContext";
 
 type UseThreadHookType = {
     threads: Thread[],
@@ -7,7 +7,7 @@ type UseThreadHookType = {
     //addComment: () => void,
     fetchComments: (props: FetchCommentProps) => void,
     updateThread: (props: UpdateThreadProps) => void,
-    deleteThread: () => void
+    deleteThread: (props: DeleteThreadProps) => void
 
 }
 

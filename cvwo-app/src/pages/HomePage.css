@@ -29,10 +29,22 @@ header {
 
 }
 
+.account-overlay {
+    opacity: 50%;
+    background-color: blue;
+    position: absolute;
+    right: 0;
+}
+
 .sticky-top {
     position: sticky;
     top: 0;
     z-index: 1;
+}
+
+.profile-icon {
+    float: right;
+    right: 1vw;
 }
 
 .fixed-bottom {

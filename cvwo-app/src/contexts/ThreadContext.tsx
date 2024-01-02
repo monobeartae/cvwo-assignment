@@ -40,19 +40,56 @@ const enum THREAD_ACTIONS {
 type AddThreadProps = {
     thread: Thread
 }
+type AddCommentProps = {
+
+}
 type FetchCommentProps = {
     id: number
 }
 type UpdateThreadProps = {
     id: number,
+}
+type DeleteThreadProps = {
 
 }
 
-export type { AddThreadProps, FetchCommentProps, UpdateThreadProps }
+export type { AddThreadProps, AddCommentProps, FetchCommentProps, UpdateThreadProps, DeleteThreadProps }
 
 type ReducerAction = {
-    type: THREAD_ACTIONS,
-    payload?: FetchCommentProps | AddThreadProps | UpdateThreadProps // check on diff/multiple input
+    type: THREAD_ACTIONS.FETCH_COMMENTS,
+    payload: FetchCommentProps
+} | {
+    type: THREAD_ACTIONS.ADD_THREAD,
+    payload: AddThreadProps
+} | {
+    type: THREAD_ACTIONS.ADD_COMMENT,
+    payload: AddCommentProps
+} | {
+    type: THREAD_ACTIONS.UPDATE_THREAD,
+    payload: UpdateThreadProps
+} | {
+    type: THREAD_ACTIONS.DELETE_THREAD,
+    payload: DeleteThreadProps
+}
+
+// pretend this is from database
+const all_replies: CommentData[] = [
+    { id: 100, root_id: 0, target_id: 0, author: 'donut', children: 'wow very cool' },
+    { id: 101, root_id: 0, target_id: 0, author: 'zhongli241', children: 'ehhhhhhhh' },
+    { id: 102, root_id: 0, target_id: 101, author: 'chicken_riCe', children: '.....' },
+    { id: 103, root_id: 1, target_id: 1, author: 'danHengsAss', children: 'wow very cool' },
+    { id: 104, root_id: 3, target_id: 3, author: 'cookieCAt', children: 'sadsge' },
+    { id: 105, root_id: 0, target_id: 0, author: 'k1mchi', children: '>--|-o' }
+];
+function setReplies(id: number, CommentData: CommentData[]): Comment[] | null {
+    var temp: Comment[] = CommentData.filter(r => r.target_id === id)
+        .map<Comment>(rd => {
+            return { id: rd.id, author: rd.author, children: rd.children, replies: null };
+        });
+    if (temp.length == 0)
+        return null;
+    temp.forEach(x => x.replies = setReplies(x.id, CommentData));
+    return temp;
 }
 
 const reducer = (state: ThreadsState, action: ReducerAction): ThreadsState => {
@@ -61,23 +98,26 @@ const reducer = (state: ThreadsState, action: ReducerAction): ThreadsState => {
             return { ...state };
         case THREAD_ACTIONS.FETCH_COMMENTS:
             console.log("fetching comments");
-            return { ...state };
+            const replies = all_replies.filter(r => r.root_id === action.payload.id);
+            var newThreads: Thread[] = [...state.threads];
+            newThreads.filter(thread => thread.id === action.payload.id).forEach(x => x.replies = setReplies(Number(x.id), replies));
+            return { threads: newThreads };
         case THREAD_ACTIONS.UPDATE_THREAD:
             return { ...state };
         case THREAD_ACTIONS.DELETE_THREAD:
             return { ...state };
         default:
-            throw new Error("Cannot find ThreadActionType: " + action.type);
+            throw new Error("Cannot find ThreadActionType");
     }
 }
 
 type UseThreadContextType = {
     state: ThreadsState,
     addThread: (props: AddThreadProps) => void,
-    addComment: () => void,
+    addComment: (props: AddCommentProps) => void,
     fetchComments: (props: FetchCommentProps) => void,
     updateThread: (props: UpdateThreadProps) => void,
-    deleteThread: () => void
+    deleteThread: (props: DeleteThreadProps) => void
 
 }
 
@@ -88,24 +128,24 @@ const initThreads: ThreadsState = {
 const useThreadContext = (initState: ThreadsState): UseThreadContextType => {
     const [state, dispatch] = useReducer(reducer, initState)
 
-    const addThread = useCallback(() => {
-        dispatch({ type: THREAD_ACTIONS.ADD_THREAD })
+    const addThread = useCallback((props: AddThreadProps) => {
+        dispatch({ type: THREAD_ACTIONS.ADD_THREAD, payload: props })
         // TBC
     }, [])
-    const addComment = useCallback(() => {
-        dispatch({ type: THREAD_ACTIONS.ADD_COMMENT })
+    const addComment = useCallback((props: AddCommentProps) => {
+        dispatch({ type: THREAD_ACTIONS.ADD_COMMENT, payload: props })
         // TBC
     }, [])
-    const fetchComments = useCallback(() => {
-        dispatch({ type: THREAD_ACTIONS.FETCH_COMMENTS })
+    const fetchComments = useCallback((props: FetchCommentProps) => {
+        dispatch({ type: THREAD_ACTIONS.FETCH_COMMENTS, payload: props })
         // TBC
     }, [])
-    const updateThread = useCallback(() => {
-        dispatch({ type: THREAD_ACTIONS.UPDATE_THREAD })
+    const updateThread = useCallback((props: UpdateThreadProps) => {
+        dispatch({ type: THREAD_ACTIONS.UPDATE_THREAD, payload: props })
         // TBC
     }, [])
-    const deleteThread = useCallback(() => {
-        dispatch({ type: THREAD_ACTIONS.DELETE_THREAD })
+    const deleteThread = useCallback((props: DeleteThreadProps) => {
+        dispatch({ type: THREAD_ACTIONS.DELETE_THREAD, payload: props })
         // TBC
     }, [])
 

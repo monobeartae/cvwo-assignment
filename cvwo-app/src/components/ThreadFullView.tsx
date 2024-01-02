@@ -19,44 +19,16 @@ type ThreadListProps = {
     // setThreads: React.Dispatch<React.SetStateAction<Thread[]>>
 }
 
-function setReplies(id: number, CommentData: CommentData[]): Comment[] | null {
-    var temp: Comment[] = CommentData.filter(r => r.target_id === id)
-        .map<Comment>(rd => {
-            return { id: rd.id, author: rd.author, children: rd.children, replies: null };
-        });
-    if (temp.length == 0)
-        return null;
-    temp.forEach(x => x.replies = setReplies(x.id, CommentData));
-    return temp;
-}
-
 const ThreadFullView = ({ }: ThreadListProps) => {
     const { id } = useParams();
     const threadData = useThreads();
 
-    // pretend this is from database
-    const all_replies: CommentData[] = [
-        { id: 100, root_id: 0, target_id: 0, author: 'donut', children: 'wow very cool' },
-        { id: 101, root_id: 0, target_id: 0, author: 'zhongli241', children: 'ehhhhhhhh' },
-        { id: 102, root_id: 0, target_id: 101, author: 'chicken_riCe', children: '.....' },
-        { id: 103, root_id: 1, target_id: 1, author: 'danHengsAss', children: 'wow very cool' },
-        { id: 104, root_id: 3, target_id: 3, author: 'cookieCAt', children: 'sadsge' },
-    ];
-    // fetch from db server
-    const replies = all_replies.filter(r => r.root_id.toString() === id);
 
     var thread = threadData.threads.find(x => x.id.toString() === id);
 
     useEffect(() => {
         thread && thread.replies == null && threadData.fetchComments({ id: thread.id })
     }, []);
-
-    // MOVE TO THREADCONTEXT
-    var newThreads: Thread[] = [...threadData.threads];
-    newThreads.filter(thread => thread.id.toString() === id).forEach(x => x.replies = setReplies(Number(x.id), replies));
-    thread = newThreads.find((thread) =>
-        thread.id.toString() === id);
-
 
     return (
         <>
