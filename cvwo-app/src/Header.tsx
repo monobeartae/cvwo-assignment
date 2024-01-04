@@ -3,7 +3,7 @@ import './pages/HomePage.css'
 import profileIcon from './media/profile-icon.png'
 import { Link } from 'react-router-dom'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Avatar, Popover, Button, IconButton, createTheme, ThemeProvider } from '@mui/material'
+import { Avatar, Box, Popover, Button, IconButton, createTheme, ThemeProvider } from '@mui/material'
 import { blueGrey, grey } from '@mui/material/colors';
 
 
@@ -14,30 +14,43 @@ const theme = createTheme({
 })
 
 const Header = () => {
-    const [showAccountOverlay, setShowAccountOverlay] = useState<boolean>(false);
+
+    const [anchorE1, setAnchorE1] = useState<HTMLButtonElement | null>(null);
+
+    const showAccountOverlay = Boolean(anchorE1);
+    const id = showAccountOverlay ? 'account-popover' : undefined;
 
     return (
         <ThemeProvider theme={theme}>
             <header className='sticky-top'>
-                mono.'s forum
-                <IconButton
-                    aria-owns={showAccountOverlay ? 'account-popover' : undefined}
-                    aria-haspopup='true'>
-                    <AccountCircleIcon />
-                </IconButton>
+                <Box className='profile-icon'>
+                    <IconButton
+                        aria-describedby={id}
+                        aria-haspopup='true'
+                        onClick={(e) => setAnchorE1(e?.currentTarget)}>
+                        <AccountCircleIcon />
+                    </IconButton>
+                </Box>
+
             </header>
-            {/* <Popover id='account-popover'
+            <Popover id={id}
                 open={showAccountOverlay}
+                onClose={() => setAnchorE1(null)}
+                anchorEl={anchorE1}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                }}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'right'
                 }}>
-                <div className='account-overlay'>
-                    <Link to='/'>
-                        <Button variant='outlined' color='primary'>Log Out</Button>
-                    </Link>
-                </div>
-            </Popover> */}
+
+                <Link to='/'>
+                    <Button variant='outlined' color='primary'>Log Out</Button>
+                </Link>
+
+            </Popover>
 
         </ThemeProvider>
 

@@ -43,8 +43,8 @@ header {
 }
 
 .profile-icon {
-    float: right;
-    right: 1vw;
+    display: flex;
+    justify-content: right;
 }
 
 .fixed-bottom {
