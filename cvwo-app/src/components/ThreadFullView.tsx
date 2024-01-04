@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import ThreadItem from './ThreadItem'
 import { Thread, CommentData, Comment } from '../contexts/ThreadContext'
 import { useThreads } from '../hooks/ThreadHooks'
-import CommentItem from './ReplyItem'
+import CommentItem from './CommentItem'
 import { Button, createTheme, ThemeProvider } from '@mui/material'
 import { blueGrey, grey } from '@mui/material/colors';
 import { FlatList, View } from 'react-native'

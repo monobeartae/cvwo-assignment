@@ -8,18 +8,22 @@ import '../pages/HomePage.css'
 
 const CommentItem = ({ id, author, children, replies }: Comment) => {
     return (
-        <div className='Comment'>
+        <div>
             <Card variant='outlined'>
                 <CardContent>
                     <p>{author}</p>
                     <p>{children}</p>
                 </CardContent>
             </Card>
-            <FlatList data={replies} renderItem={
-                ({ item }) =>
-                    <CommentItem id={item.id} author={item.author} replies={item.replies}>{item.children}</CommentItem>
-            }
-                keyExtractor={(item) => item.id.toString()} ItemSeparatorComponent={() => <View style={{ height: 2 }} />} />
+            <div className='comment'>
+                <FlatList
+                    data={replies} renderItem={
+                        ({ item }) =>
+                            <CommentItem id={item.id} author={item.author} replies={item.replies}>{item.children}</CommentItem>
+                    }
+                    keyExtractor={(item) => item.id.toString()} ItemSeparatorComponent={() => <View style={{ height: 2 }} />} />
+            </div>
+
         </div>
 
     )

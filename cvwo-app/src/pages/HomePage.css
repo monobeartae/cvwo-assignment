@@ -4,10 +4,9 @@
     position: relative;
 }
 
-.reply {
-    position: absolute;
+.comment {
     width: 90%;
-    right: 0;
+    float: right;
 }
 
 footer {
@@ -42,7 +41,7 @@ header {
     z-index: 1;
 }
 
-.profile-icon {
+.align-right {
     display: flex;
     justify-content: right;
 }

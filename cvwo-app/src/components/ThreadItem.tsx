@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import Card from '@mui/material/Card';
 import { useNavigate } from 'react-router-dom'
 import { Box, CardActionArea, CardContent } from '@mui/material';
+
 import { Thread } from '../contexts/ThreadContext';
 
 const ThreadItem = ({ id, title, children, author, replies }: Thread) => {

@@ -23,7 +23,7 @@ const Header = () => {
     return (
         <ThemeProvider theme={theme}>
             <header className='sticky-top'>
-                <Box className='profile-icon'>
+                <Box className='align-right'>
                     <IconButton
                         aria-describedby={id}
                         aria-haspopup='true'
