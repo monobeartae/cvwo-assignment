@@ -6,6 +6,7 @@ import './HomePage.css'
 
 import Header from '../Header'
 import Footer from '../Footer'
+import NavBar from '../NavBar'
 import { useThreads } from '../hooks/ThreadHooks'
 import { User } from '../contexts/UserContext'
 import ThreadsView from '../components/ThreadsView'
@@ -31,7 +32,9 @@ const HomePage = ({ user }: HomeProps) => {
     return (
         <ThreadProvider threads={threads}>
             <>
+
                 <Header />
+                <NavBar />
                 <div className='threads'>
                     <Routes>
                         <Route path={"/thread/:id"} element={
@@ -45,6 +48,7 @@ const HomePage = ({ user }: HomeProps) => {
                         } />
                     </Routes>
                 </div>
+
                 <Footer username={user.name} />
             </>
         </ThreadProvider>

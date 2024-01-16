@@ -75,7 +75,7 @@ type ReducerAction = {
 // pretend this is from database
 const all_replies: CommentData[] = [
     { id: 100, root_id: 0, target_id: 0, author: 'donut', children: 'wow very cool' },
-    { id: 101, root_id: 0, target_id: 0, author: 'zhongli241', children: 'ehhhhhhhh' },
+    { id: 101, root_id: 0, target_id: 0, author: 'zhongli241', children: 'ehhhhhhhh nani deska lorem ipsum aa aa aaaaaa aaa zzz overflow lets go  whee whee whee need more spam tes test test test test i want to sleep ngl bed looking very soft rn' },
     { id: 102, root_id: 0, target_id: 101, author: 'chicken_riCe', children: '.....' },
     { id: 103, root_id: 1, target_id: 1, author: 'danHengsAss', children: 'wow very cool' },
     { id: 104, root_id: 3, target_id: 3, author: 'cookieCAt', children: 'sadsge' },

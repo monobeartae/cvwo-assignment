@@ -11,10 +11,18 @@ const CommentItem = ({ id, author, children, replies }: Comment) => {
         <div>
             <Card variant='outlined'>
                 <CardContent>
-                    <p>{author}</p>
-                    <p>{children}</p>
+                    <h4 style={{
+                        margin: 0
+                    }}>{author}</h4>
+                    <hr style={{
+                        borderColor: 'ghostwhite'
+                    }} />
+                    <p style={{
+                        margin: 0
+                    }}>{children}</p>
                 </CardContent>
             </Card>
+
             <div className='comment'>
                 <FlatList
                     data={replies} renderItem={
@@ -23,7 +31,6 @@ const CommentItem = ({ id, author, children, replies }: Comment) => {
                     }
                     keyExtractor={(item) => item.id.toString()} ItemSeparatorComponent={() => <View style={{ height: 2 }} />} />
             </div>
-
         </div>
 
     )

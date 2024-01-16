@@ -42,6 +42,7 @@ const ThreadFullView = ({ }: ThreadListProps) => {
                     <h2> {thread.title}</h2>
                     <p>by {thread.author}</p>
                     <p>{thread.children}</p>
+                    <hr></hr>
                 </>}
             {thread &&
                 <FlatList data={thread.replies} renderItem={
