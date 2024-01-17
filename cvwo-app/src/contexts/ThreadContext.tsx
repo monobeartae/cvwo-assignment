@@ -95,7 +95,9 @@ function setReplies(id: number, CommentData: CommentData[]): Comment[] | null {
 const reducer = (state: ThreadsState, action: ReducerAction): ThreadsState => {
     switch (action.type) {
         case THREAD_ACTIONS.ADD_THREAD:
-            return { ...state };
+            var newThreads: Thread[] = [...state.threads];
+            newThreads.push(action.payload.thread);
+            return { threads: newThreads };
         case THREAD_ACTIONS.FETCH_COMMENTS:
             console.log("fetching comments");
             const replies = all_replies.filter(r => r.root_id === action.payload.id);

@@ -30,7 +30,7 @@ const LoginPage = ({ setUser }: LoginProps) => {
                     <Link to='/home'>
                         <Button variant="outlined" color='primary'
                             onClick={() => {
-                                console.log(input);
+                                console.log(input)
                                 const user = { id: 1, name: input };
                                 setUser(user);
                             }}>Enter</Button>

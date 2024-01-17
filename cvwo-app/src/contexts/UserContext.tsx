@@ -3,4 +3,8 @@ type User = {
     name: string
 }
 
+type UsersState = {
+    users: User[]
+}
+
 export type { User }

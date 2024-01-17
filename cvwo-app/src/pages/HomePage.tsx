@@ -7,11 +7,13 @@ import './HomePage.css'
 import Header from '../Header'
 import Footer from '../Footer'
 import NavBar from '../NavBar'
+import CreateThread from '../CreateThread'
 import { useThreads } from '../hooks/ThreadHooks'
 import { User } from '../contexts/UserContext'
 import ThreadsView from '../components/ThreadsView'
 import ThreadFullView from '../components/ThreadFullView'
 import { Thread, ThreadProvider } from '../contexts/ThreadContext'
+import { IconButton } from '@mui/material';
 
 type HomeProps = {
     user: User
@@ -48,7 +50,7 @@ const HomePage = ({ user }: HomeProps) => {
                         } />
                     </Routes>
                 </div>
-
+                <CreateThread />
                 <Footer username={user.name} />
             </>
         </ThreadProvider>
